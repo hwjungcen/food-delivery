@@ -26,13 +26,13 @@ public class CookingController {
     @RequestMapping(value = "cookings/{id}/accept",
         method = RequestMethod.PUT,
         produces = "application/json;charset=UTF-8")
-    public Cooking accept(@PathVariable(value = "id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Cooking accept(@PathVariable(value = "id") Long id, @RequestBody AcceptCommand acceptCommand, HttpServletRequest request, HttpServletResponse response) throws Exception {
             System.out.println("##### /cooking/accept  called #####");
             Optional<Cooking> optionalCooking = cookingRepository.findById(id);
             
             optionalCooking.orElseThrow(()-> new Exception("No Entity Found"));
             Cooking cooking = optionalCooking.get();
-            cooking.accept();
+            cooking.accept(acceptCommand);
             
             cookingRepository.save(cooking);
             return cooking;

@@ -83,7 +83,7 @@ public class Cooking  {
 
 
 
-    public void accept(){
+    public void accept(AcceptCommand acceptCommand){
         OrderAccepted orderAccepted = new OrderAccepted(this);
         orderAccepted.publishAfterCommit();
 
